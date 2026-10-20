@@ -22,9 +22,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9EBC6AE030836887002601F4 /* CS50X */ = {
+		9EBC6AE030836887002601F4 /* Repositories_C */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CS50X;
+			path = Repositories_C;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -41,7 +41,7 @@
 		9EBC6AD530836887002601F4 = {
 			isa = PBXGroup;
 			children = (
-				9EBC6AE030836887002601F4 /* CS50X */,
+				9EBC6AE030836887002601F4 /* Repositories_C */,
 				9EBC6ADF30836887002601F4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,7 +68,7 @@
 			buildRules = (
 			);
 			fileSystemSynchronizedGroups = (
-				9EBC6AE030836887002601F4 /* CS50X */,
+				9EBC6AE030836887002601F4 /* Repositories_C */,
 			);
 			name = CS50X;
 			productName = CS50X;
@@ -169,11 +169,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lcs50";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -224,10 +227,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lcs50";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -236,6 +242,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Repositories_C/libcs50/build/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -244,6 +254,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Repositories_C/libcs50/build/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
