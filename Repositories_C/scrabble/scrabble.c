@@ -52,14 +52,14 @@ void result(int s1, int s2)
 {
     if (s1 > s2)
     {
-        printf("Player1 wins! ");
+        printf("Player1 wins! \n");
     }
     else if (s1 < s2)
     {
-        printf("Player2 wins! ");
+        printf("Player2 wins! \n");
     }
     else
     {
-        printf("Tie! ");
+        printf("Tie! \n");
     }
 }
