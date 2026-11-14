@@ -5,15 +5,15 @@ void print(int n);
 
 int main(){
   int height = get_int("Height: ");
-  print(height);
+  printf(height);
   return 0;
 }
 
-void print(int n){
+void print(int n){ 
   if (n <= 0)
     return;
-  
-  print(n - 1);
+  `
+  printf(n - 1); 
   
   for (int i = 0; i < n; ++i)
     printf("#");
