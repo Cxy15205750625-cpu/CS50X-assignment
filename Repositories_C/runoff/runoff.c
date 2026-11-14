@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 // Max voters and candidates
-#define MAX_VOTERS 100
-#define MAX_CANDIDATES 9
+#define MAX_VOTERS 100 // 选民上界
+#define MAX_CANDIDATES 9 // 候选人上界
 
 // preferences[i][j] is jth preference for voter i
-int preferences[MAX_VOTERS][MAX_CANDIDATES];
+int preferences[MAX_VOTERS][MAX_CANDIDATES]; 
 
 // Candidates have name, vote count, eliminated status
 typedef struct
@@ -42,19 +42,24 @@ int main(int argc, string argv[])
 
     // Populate array of candidates
     candidate_count = argc - 1;
+    // 如果大于我们设定的上界，则退出
     if (candidate_count > MAX_CANDIDATES)
     {
         printf("Maximum number of candidates is %i\n", MAX_CANDIDATES);
         return 2;
     }
+
+    // Save state, which is saved candidates' name, vote(0), eliminated. So we can use them later.
     for (int i = 0; i < candidate_count; i++)
     {
         candidates[i].name = argv[i + 1];
         candidates[i].votes = 0;
-        candidates[i].eliminated = false;
+        candidates[i].eliminated = false; // 淘汰状态
     }
 
-    voter_count = get_int("Number of voters: ");
+    voter_count = get_int("Number of voters: "); 
+
+    // 同上
     if (voter_count > MAX_VOTERS)
     {
         printf("Maximum number of voters is %i\n", MAX_VOTERS);
@@ -77,7 +82,6 @@ int main(int argc, string argv[])
                 return 4;
             }
         }
-
         printf("\n");
     }
 
@@ -126,22 +130,36 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    // TODO
+  for(k=0; k < candidate_count; ++k){
+    if(strcmp(candidates[k].name, name) == 0){
+      preferences[voter][rank] = k;
+      return true;
+    }
+  }
     return false;
 }
 
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
-    return;
+  for(i = 0; i < voter_count; ++i){
+    for(j = 0; j < candidate_count; ++j){
+      int k = preferences[i][j];
+
+      if(!candidate[k].eliminated){
+	++candidates[k].votes;
+	break;
+      }
+    }
+  }
+  return;
 }
 
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
-    return false;
+  
+  return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
