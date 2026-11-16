@@ -9,8 +9,7 @@
 int preferences[MAX_VOTERS][MAX_CANDIDATES]; 
 
 // Candidates have name, vote count, eliminated status
-typedef struct
-{
+typedef struct{
     string name;
     int votes;
     bool eliminated;
@@ -31,8 +30,7 @@ int find_min(void);
 bool is_tie(int min);
 void eliminate(int min);
 
-int main(int argc, string argv[])
-{
+int main(int argc, string argv[]){
     // Check for invalid usage
     if (argc < 2)
     {
@@ -67,8 +65,7 @@ int main(int argc, string argv[])
     }
 
     // Keep querying for votes
-    for (int i = 0; i < voter_count; i++)
-    {
+    for (int i = 0; i < voter_count; i++){
 
         // Query for each rank
         for (int j = 0; j < candidate_count; j++)
@@ -86,8 +83,7 @@ int main(int argc, string argv[])
     }
 
     // Keep holding runoffs until winner exists
-    while (true)
-    {
+    while (true){
         // Calculate votes given remaining candidates
         tabulate();
 
@@ -119,8 +115,7 @@ int main(int argc, string argv[])
         eliminate(min);
 
         // Reset vote counts back to zero
-        for (int i = 0; i < candidate_count; i++)
-        {
+        for (int i = 0; i < candidate_count; i++){
             candidates[i].votes = 0;
         }
     }
@@ -128,8 +123,7 @@ int main(int argc, string argv[])
 }
 
 // Record preference if vote is valid
-bool vote(int voter, int rank, string name)
-{
+bool vote(int voter, int rank, string name){
   for(k=0; k < candidate_count; ++k){
     if(strcmp(candidates[k].name, name) == 0){
       preferences[voter][rank] = k;
@@ -140,8 +134,7 @@ bool vote(int voter, int rank, string name)
 }
 
 // Tabulate votes for non-eliminated candidates
-void tabulate(void)
-{
+void tabulate(void){
   for(i = 0; i < voter_count; ++i){
     for(j = 0; j < candidate_count; ++j){
       int k = preferences[i][j];
@@ -156,29 +149,24 @@ void tabulate(void)
 }
 
 // Print the winner of the election, if there is one
-bool print_winner(void)
-{
+bool print_winner(void){
   
-  return false;
 }
 
 // Return the minimum number of votes any remaining candidate has
-int find_min(void)
-{
+int find_min(void){
     // TODO
     return 0;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
-bool is_tie(int min)
-{
+bool is_tie(int min){
     // TODO
     return false;
 }
 
 // Eliminate the candidate (or candidates) in last place
-void eliminate(int min)
-{
+void eliminate(int min){
     // TODO
     return;
 }
