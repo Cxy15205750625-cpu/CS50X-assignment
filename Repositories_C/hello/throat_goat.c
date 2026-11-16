@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(void){
-  printf("Hello, bitch! Taste my dick. \n");
+  printf("Hello, throat goat!");
   return 0;
 }
 
