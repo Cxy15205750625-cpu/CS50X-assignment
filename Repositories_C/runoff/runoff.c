@@ -1,5 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <limits.h>
+#include <string.h>
 
 // Max voters and candidates
 #define MAX_VOTERS 100 // 选民上界
@@ -13,7 +15,7 @@ typedef struct{
     string name;
     int votes;
     bool eliminated;
-} candidate;
+} candidate;//candidate just like "int, void, bool", we can candidate something, but doesn't take the data. So we can't write candidate.name. If I want to take the data, I must write candidates.name, which is an array we defined.
 
 // Array of candidates
 candidate candidates[MAX_CANDIDATES];
@@ -79,6 +81,7 @@ int main(int argc, string argv[]){
                 return 4;
             }
         }
+
         printf("\n");
     }
 
@@ -114,7 +117,7 @@ int main(int argc, string argv[]){
         // Eliminate anyone with minimum number of votes
         eliminate(min);
 
-        // Reset vote counts back to zero
+        // Reset vote counts back to zero. Why? Because we save the preference, but we need to clear the data this time, if we don't clear, there is no one be eliminated. And in the while, we will put the eliminated one's votes to others.
         for (int i = 0; i < candidate_count; i++){
             candidates[i].votes = 0;
         }
@@ -124,7 +127,7 @@ int main(int argc, string argv[]){
 
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name){
-  for(k=0; k < candidate_count; ++k){
+  for(int k=0; k < candidate_count; ++k){
     if(strcmp(candidates[k].name, name) == 0){
       preferences[voter][rank] = k;
       return true;
@@ -135,38 +138,57 @@ bool vote(int voter, int rank, string name){
 
 // Tabulate votes for non-eliminated candidates
 void tabulate(void){
-  for(i = 0; i < voter_count; ++i){
-    for(j = 0; j < candidate_count; ++j){
+  for(int i = 0; i < voter_count; ++i){
+    for(int j = 0; j < candidate_count; ++j){
       int k = preferences[i][j];
 
-      if(!candidate[k].eliminated){
+      if(!candidates[k].eliminated){
 	++candidates[k].votes;
 	break;
       }
     }
   }
-  return;
 }
 
 // Print the winner of the election, if there is one
 bool print_winner(void){
-  
-}
-
+  for(int i=0; i<candidate_count; ++i){
+    if(candidates[i].votes > voter_count / 2){
+      printf("The winner is %s.\n", candidates[i].name);
+	return true; 
+    }
+  }
+  return false;
+}//what status? If no one's votes are more than half, the program return false, and we need to count again.  
+ 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void){
-    // TODO
-    return 0;
+  int min_votes = INT_MAX;
+  
+  for(int i=0; i<candidate_count; ++i){
+    if(!candidates[i].eliminated &&
+       candidates[i].votes < min_votes)
+      min_votes = candidates[i].votes;
+  }
+  return min_votes;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min){
-    // TODO
-    return false;
+  for(int i=0; i<candidate_count; ++i){
+    if(!candidates[i].eliminated &&
+       candidates[i].votes != min){
+      return false;
+    }
+  }
+  return true;
 }
 
 // Eliminate the candidate (or candidates) in last place
-void eliminate(int min){
-    // TODO
-    return;
+void eliminate(int min){ //传入最小值，将最小值与候选人的数据结构相匹配(for(every candidates)if(candidates[i].votes == min))，将这个候选人的 eliminated 设置为 true(candidates[i].eliminated = true), 不需要返回值。
+  for(int i=0; i<candidate_count; ++i){
+    if(candidates[i].votes == min){
+      candidates[i].eliminated = true;
+    }
+  }
 }
