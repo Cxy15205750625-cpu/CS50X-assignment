@@ -1,0 +1,12 @@
+# macOS 和编辑器生成的文件
+.DS_Store
+*~
+
+# C 编译产物
+*.dSYM/
+*.o
+a.out
+/Repositories_C/runoff/runoff
+
+# 本机单独克隆的 CS50 库
+/Repositories_C/libcs50/
